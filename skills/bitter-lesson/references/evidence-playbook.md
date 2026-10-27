@@ -61,7 +61,7 @@ Do not declare a task beyond current models—or propose fine-tuning/complex sca
 2. **Frontier model + reasoning budget:** Was a current frontier model tested with an appropriate test-time compute budget?
 3. **Minimalist execution harness:** Does the agent have raw shell access, filesystem tools, fast search (`ripgrep`), and the ability to run tests and inspect stack traces?
 4. **Verifier & environment feedback loop:** Can the agent observe runtime errors, UI state, or compiler/linter output and self-correct iteratively?
-5. **Inference-time scaling / parallel search:** Would running $N$ parallel trajectories (`rig` / `forge` workers) and selecting via a deterministic test suite or reward verifier solve it today?
+5. **Inference-time scaling / parallel search:** Would running $N$ parallel trajectories and selecting via a deterministic test suite or reward verifier solve it today?
 6. **Context hygiene:** Is failure caused by reasoning limits, or simply by noisy tool dumps polluting the context window?
 7. **Adaptation / Fine-Tuning (Last Resort for Capability, First Resort for Economics):** Only after steps 1–6 are characterized should you propose weight updates—either to distill the working pipeline into a cheap/fast model or to run online RL against the verifier from Step 4.
 
@@ -73,7 +73,7 @@ When literature evidence doesn't cleanly transfer to the user's workload, propos
 
 1. **Task Set (10–30 fresh tasks):** Draw directly from the real workload (easy, typical, and hard cases). Ensure zero overlap with public training data and hold out a test split.
 2. **Locked Arms:**
-   - *Arm A (Frontier Generalist Baseline):* Best current frontier model in a plain shell/tool harness (`rig` / Claude Code / Codex).
+   - *Arm A (Frontier Generalist Baseline):* Best current frontier model in a plain shell/tool harness.
    - *Arm B (Small / Open-Weight Baseline):* Strongest small/local model (`Haiku`, `Qwen3-Coder`, `Devstral`) in the same harness to anchor unit economics.
    - *Arm C (Proposed Intervention):* Only if Arms A/B reveal a specific bottleneck.
 3. **Pre-registered Grading & Full-Workload Metrics:**

@@ -1,6 +1,6 @@
 # bitter-lesson
 
-An agent skill for Claude Code, Codex, and Ribbon Field that recalibrates models to where AI actually is—correcting **stale, low-biased pretraining priors** and **anti-Bitter-Lesson scaffolding** whenever scoping, architecting, evaluating, or forecasting AI/LLM projects.
+An agent skill that recalibrates coding and research agents to where AI actually is—correcting **stale, low-biased pretraining priors** and **anti-Bitter-Lesson scaffolding** whenever scoping, architecting, evaluating, or forecasting AI/LLM projects.
 
 ## Why This Exists
 
@@ -27,8 +27,8 @@ Without an explicit calibration gate, models propose goals that are already comm
 ## Installation
 
 ```bash
-git clone git@github.com:3xC1ibR/bitter-lesson.git /opt/projects/bitter-lesson
-ln -sfn /opt/projects/bitter-lesson/skills/bitter-lesson ~/.agents/skills/bitter-lesson
+git clone https://github.com/3xC1ibR/bitter-lesson.git
+ln -sfn "$(pwd)/bitter-lesson/skills/bitter-lesson" ~/.agents/skills/bitter-lesson
 ```
 
 ## License

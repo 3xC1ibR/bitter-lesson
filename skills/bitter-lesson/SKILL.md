@@ -71,7 +71,7 @@ If yes to (1) or (2), **it is a commodity baseline, not a project goal.** Say so
 
 > **Worked Example:** A model proposed this as the success criterion for an LLM project: *"fine-tune a model so it goes from fixing small bugs to working on large codebases."* It fails the test immediately. As of October 2026, frontier models report ~80–90% on SWE-bench Pro (multi-file repo changes), the smallest current Claude model (Haiku 5.5) reports ~65%, and open-weight models with 3B active parameters (`Qwen3-Coder-Next`) or 24B dense parameters (`Devstral Small 2`) do repo-level agentic work on a single local machine. A real goal would target reliability, economics, horizon, or domain—for example, matching frontier repo-level accuracy at 1/20th the inference cost on a 24GB node, or sustaining a multi-day cross-repo migration with zero human intervention.
 
-**The 1-Hour Rule:** When you can't tell from literature whether something is solved, the cheapest resolution is to run the strongest current model in a minimal shell harness (`rig`, `forge`, Claude Code, Codex) on 5–10 real tasks for an hour. Direct empirical probing beats debating priors.
+**The 1-Hour Rule:** When you can't tell from literature whether something is solved, the cheapest resolution is to run the strongest current model in a minimal shell harness (shell, files, tests, search) on 5–10 real tasks for an hour. Direct empirical probing beats debating priors.
 
 ### 3. Project the Trend Over the Project's Lifetime
 
@@ -93,10 +93,10 @@ Rich Sutton's Bitter Lesson: general methods that scale with compute beat hand-b
 | Appreciates as Models Improve (Build This) | Depreciates as Models Improve (Avoid or Plan to Delete) |
 | :--- | :--- |
 | **Verifiers, tests, graders, un-gameable reward signals** | Hand-written task decompositions, rigid DAGs, and router chains |
-| **Fast, deterministic execution sandboxes** (`forge`) & environments | Prompt tricks and brittle parsers that patch specific failure modes |
-| **Minimalist shell + filesystem harnesses** (`rig`) | Complex AST graphs and custom chunking heuristics to "help the model read code" |
+| **Fast, deterministic execution sandboxes & environments** | Prompt tricks and brittle parsers that patch specific failure modes |
+| **Minimalist shell + filesystem harnesses** | Complex AST graphs and custom chunking heuristics to "help the model read code" |
 | **Evals that measure true end-to-end workload outcomes** | Narrow SFT runs to teach general capabilities the frontier already has |
-| **Proprietary context, durable memory** (`stoic`), **and feedback loops** | Context/memory compression hacks built around temporary window limits |
+| **Proprietary context, durable memory, and feedback loops** | Context/memory compression hacks built around temporary window limits |
 | **Ways to spend inference compute** (parallel rollouts, search, verification) | Human-in-the-loop gates that exist only because the model "can't yet" |
 
 Before recommending anything from the right column, ask what weakness it compensates for and when the trend says that weakness disappears. If it is within the project's lifetime, recommend the left-column version—or explicitly mark the scaffolding as a disposable stopgap with a deletion trigger.
