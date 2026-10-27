@@ -1,36 +1,35 @@
 # bitter-lesson
 
-An agent skill for Claude Code, Codex, and Ribbon Field that fixes **pretraining capability lag** and **anti-Bitter-Lesson scaffolding** when scoping, architecting, or evaluating AI/LLM projects.
+An agent skill for Claude Code, Codex, and Ribbon Field that recalibrates models to where AI actually is—correcting **stale, low-biased pretraining priors** and **anti-Bitter-Lesson scaffolding** whenever scoping, architecting, evaluating, or forecasting AI/LLM projects.
 
-## The Problem
+## Why This Exists
 
-Language models are systematically neither **AI-pilled** nor **Bitter-pilled** enough when reasoning about AI capabilities:
+Models systematically underestimate current AI capabilities and propose obsolete project goals because three biases stack inside their weights:
 
-1. **Pretraining Corpus Gravity (2022–2024 Priors):** Most tokens in a model's training distribution discussing "what LLMs can and cannot do" were written when models struggled with multi-file edits, required brittle AST/RAG pipelines, and needed task-specific SFT for basic tool use.
-2. **Zero Awareness of Post-Training & Harness Scaling:** A model's static weights do not encode its own post-training execution-RL or what happens when a model is placed inside a minimalist shell harness with test-time compute scaling.
-3. **Swimming Against Compute:** Without an explicit epistemic gate, models propose project goals that are already solved by baseline models (e.g., *"fine-tune a model so it can move from fixing small bugs to working across large codebases"*) or suggest heavy human-engineered scaffolding that gets obsoleted within a single 3.5-month capability doubling period.
+1. **Cutoff Lag:** On METR's long-task horizon measure, the length of software tasks frontier agents complete has been doubling every **~3 to 4.5 months** since 2023–2024. A six-month-old cutoff is 1.5 to 2 doublings behind.
+2. **Corpus Lag:** Most tokens in a model's training distribution discussing "what LLMs can't do" were written about 2020–2024 models. Fluency with claims like *"LLMs struggle with long-horizon tasks"* or *"models need custom RAG/AST graphs for large codebases"* is an artifact of training data volume, not current reality.
+3. **Inherited Forecaster Bias:** Human experts and superforecasters have repeatedly underestimated benchmark progress (FRI XPT and LEAP studies—e.g., the spring 2026 expert end-of-year median for METR's 80% horizon was nearly met by May). Models inherited that conservatism.
 
-## What This Skill Enforces
+Without an explicit calibration gate, models propose goals that are already commodity baselines (e.g., *"fine-tune a model so it goes from fixing small bugs to working on large codebases"*) and recommend hand-built scaffolding that the next checkpoint release will render pointless.
 
-When triggered (during AI project scoping, agent/harness architecture design, model selection, or SFT/RL planning), [`skills/bitter-lesson/SKILL.md`](skills/bitter-lesson/SKILL.md) forces the agent through four gates:
+## What the Skill Enforces
 
-1. **Epistemic Distrust Gate (Zero Parametric Reliance):** Forbids claiming what frontier, mid-tier, or open-weight models "can't do yet" from internal weights. Requires checking the dated empirical floor in [`skills/bitter-lesson/references/frontier-baseline.md`](skills/bitter-lesson/references/frontier-baseline.md) and running live web queries (METR task-completion horizon, Terminal-Bench, FrontierSWE, open-weight lag) plus a 5-minute local empirical probe when applicable.
-2. **The Two-Doublings Trajectory Test:** Evaluates any 3–6 month project against the post-2024 empirical doubling rate (**~3.5–4.3 months** on METR autonomous task horizons, with open-weight models lagging by only **4–6 months**). Rejects goals that swim against compute in favor of verifiable environments, high-throughput sandboxes, and deterministic reward signals.
-3. **The Bitter Lesson Architecture Audit:** Strips out rigid prompt DAGs, custom AST/RAG routers, and hand-crafted heuristics in favor of minimal execution harnesses (raw bash + filesystem + verifier).
-4. **Strict SFT / RL Justification Gate:** Restricts fine-tuning proposals to latency/cost distillation from a proven teacher, online RL against a novel un-gameable verifier, or strict representation priors.
+- **[`skills/bitter-lesson/SKILL.md`](skills/bitter-lesson/SKILL.md)** — Core workflow:
+  1. **Refresh Before You Assess:** Treat internal knowledge as a floor, never a reading. Search current frontier releases, METR horizons, discriminating leaderboards (`SWE-bench Pro`, `Terminal-Bench 4.0`, `FrontierSWE v2`, `OSWorld 2.0`), and small/open-weight models (`Qwen3-Coder-Next`, `Devstral Small 2`, `Haiku 5.5`).
+  2. **The "Already Solved?" & Elicitation Test:** Verify whether a current frontier or small/open-weight model already solves the goal in a plain agent harness (shell, files, tests, search) before accepting it as a milestone. Use the **1-Hour Rule** (test the strongest model on the real task) when in doubt.
+  3. **Project the Trend ($2^{T/d}$):** Stress-test 3-, 6-, 12-, and 18-month plans against ~3.5–4.3 month capability doublings (~1.7×, ~2.8×, ~8×, ~22×).
+  4. **Apply Rich Sutton's Bitter Lesson:** Sort system components into **Appreciating** (verifiers, deterministic sandboxes, true workload evals, proprietary feedback loops, inference-time search) vs. **Depreciating** (rigid DAG decompositions, prompt tricks, narrow capability SFT, context-limit hacks).
+  5. **Catch Stale Language & Classify Narrowly:** Separate `Commodity baseline`, `Feasible with engineering`, `Frontier / variable`, `Unproven for this workload`, and `Blocked under stated constraints`.
+  6. **Stay Calibrated, Not Credulous:** Account for the 5–10× gap between 50% and 80% reliability horizons, spec messiness, missing graders, research judgment/taste, vendor vs. independent harness gaps, and reward hacking.
+- **[`skills/bitter-lesson/references/frontier-baseline.md`](skills/bitter-lesson/references/frontier-baseline.md)** — Dated empirical snapshot (`2026-10-27`) covering METR horizons, SWE-bench Pro / Terminal-Bench 4.0, small/open-weight models, saturated vs. discriminating benchmarks, production authorship data, and primary refresh sources.
+- **[`skills/bitter-lesson/references/evidence-playbook.md`](skills/bitter-lesson/references/evidence-playbook.md)** — Operational playbook for bidirectional search (underestimation vs. overestimation audits), evidence grading, the 7-step elicitation ladder, and designing 10–30 task decisive pilots.
 
 ## Installation
 
-### Personal Skill Symlink (`~/.agents/skills` / `~/.claude/skills`)
-
 ```bash
 git clone git@github.com:3xC1ibR/bitter-lesson.git /opt/projects/bitter-lesson
-ln -s /opt/projects/bitter-lesson/skills/bitter-lesson ~/.agents/skills/bitter-lesson
+ln -sfn /opt/projects/bitter-lesson/skills/bitter-lesson ~/.agents/skills/bitter-lesson
 ```
-
-### Root Entrypoint
-
-For single-directory skill loaders, `SKILL.md` and `references/` are also linked at the repository root.
 
 ## License
 
