@@ -1,0 +1,24 @@
+{
+  "name": "bitter-lesson",
+  "version": "0.1.0",
+  "description": "Calibrate AI/LLM project scoping, agent architectures, and training plans against live empirical frontier benchmarks and Rich Sutton's Bitter Lesson.",
+  "author": {
+    "name": "r",
+    "email": "hi@rquinonez.com"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Bitter Lesson",
+    "shortDescription": "Calibrate AI project scoping and architectures against live frontier capabilities.",
+    "longDescription": "Prevents models from relying on stale pretraining priors when scoping AI/LLM projects, agent harnesses, or fine-tuning runs. Enforces live empirical benchmark grounding (METR task horizons, Terminal-Bench, open-weight lag) and Rich Sutton's Bitter Lesson.",
+    "developerName": "r",
+    "category": "Productivity",
+    "capabilities": [
+      "Frontier AI capability calibration",
+      "Two-doublings trajectory scoping",
+      "Bitter Lesson architecture audit",
+      "SFT/RL justification gate"
+    ],
+    "defaultPrompt": "Use $bitter-lesson to audit this AI project's goals, architecture, and training assumptions against current frontier capabilities."
+  }
+}

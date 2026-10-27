@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "bitter-lesson",
+  "description": "Frontier AI capability calibration and Bitter Lesson architecture audit skill",
+  "owner": {
+    "name": "r",
+    "email": "hi@rquinonez.com"
+  },
+  "plugins": [
+    {
+      "name": "bitter-lesson",
+      "description": "Calibrate AI/LLM project scoping, agent architectures, and training plans against live empirical frontier benchmarks and Rich Sutton's Bitter Lesson.",
+      "author": {
+        "name": "r",
+        "email": "hi@rquinonez.com"
+      },
+      "category": "productivity",
+      "source": "."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "bitter-lesson",
+  "version": "0.1.0",
+  "description": "Calibrate AI/LLM project scoping, agent architectures, and training plans against live empirical frontier benchmarks and Rich Sutton's Bitter Lesson.",
+  "license": "MIT",
+  "author": {
+    "name": "r",
+    "email": "hi@rquinonez.com"
+  }
+}
